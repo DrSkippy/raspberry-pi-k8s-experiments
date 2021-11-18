@@ -1,0 +1,4 @@
+ 1570  sudo mount -t nfs 192.168.127.8:/mnt/disk/vol1 ./tmp/
+ 1571  sudo umount ./tmp 
+ 1572  sudo mount -t nfs 192.168.127.9:/mnt/disk/vol1 ./tmp/
+ 1578  sudo umount ./tmp 

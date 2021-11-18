@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+spec:
+  selector:
+    matchLabels:
+      app: simple
+      role: master
+      tier: backend
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: simple
+        role: master
+        tier: backend
+    # This is the pod template
+    spec:
+      containers:
+      - name: hello
+        image: busybox
+        command: ['sh', '-c', 'echo "Hello, Kubernetes!" && sleep 3600']
+      restartPolicy: Always
+    # The pod template ends here
