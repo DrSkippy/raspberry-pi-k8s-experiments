@@ -75,6 +75,6 @@ On OSX, test it out:
 
 ```
 s.hendrickson@BLD-ML-00027935 ~ % curl -kL https://192.168.127.7/foo                                        
-Hello World from App FOO%                                                                                                                                                     s.hendrickson@BLD-ML-00027935 ~ % curl -kL https://192.168.127.7/bar
+Hello World from App FOO%                                                                                                                                           s.hendrickson@BLD-ML-00027935 ~ % curl -kL https://192.168.127.7/bar
 Hello World from App BAR%    
 ```
