@@ -2,35 +2,38 @@
 
 Microk8s ingress example
 
-Build dockerfile and push to docker repository (using local repository in my case)
+Build dockerfile and push to docker repository
+* 2021 Nov 18
+* I did this on worker-02
+* Build an image for arm
+
 ```
 docker build . -t my-microk8s-app
 docker tag my-microk8s-app localhost:5000/my-microk8s-app
 docker push localhost:5000/my-microk8s-app
 ```
 
-
-Build and push to microk8s repo from a pi machine:
+Examples and explanations for build and push to microk8s repo from a pi machine:
 
 ```angular2html
 https://medium.com/manikkothu/build-and-deploy-apps-on-microk8s-1df26d1ddd3c
 ```
 
+From commandline on worker-01
+* cluster repo is on master and at port 5000
+* configure docker for insecure repo push buy editing config and restarting
+
 ``` 
- 1285  sudo vim /etc/docker/daemon.json 
- 1286  sudo systemctl restart docker
- 1287  curl 10.1.235.207:5000/
- 1288  curl 10.1.235.207:5000/v2
- 1289  docker tag my-microk8s-app 10.1.235.207:5000/my-microk8s-app
- 1290  docker push 10.1.235.207:5000/my-microk8s-app
- 1291  history
-ubuntu@k8s-worker-01:/mnt/disk/vol1/working/raspberry-pi-k8s-experiments/microk8s-ingress-example$  curl 10.1.235.207:5000/v2
-<a href="/v2/">Moved Permanently</a>.
+sudo vim /etc/docker/daemon.json    # edit to ip shown below, for example
+sudo systemctl restart docker
+docker tag my-microk8s-app 10.1.235.207:5000/my-microk8s-app
+docker push 10.1.235.207:5000/my-microk8s-app
 
 ubuntu@k8s-worker-01:/mnt/disk/vol1/working/raspberry-pi-k8s-experiments/microk8s-ingress-example$ curl 10.1.235.207:5000/v2/_catalog
 {"repositories":["my-microk8s-app"]}
 ```
 
+This was my edit of /etc/docker/daemon.json:
 
 ```
 ubuntu@k8s-worker-01:/mnt/disk/vol1/working/raspberry-pi-k8s-experiments/microk8s-ingress-example$ cat /etc/docker/daemon.json 
@@ -45,24 +48,27 @@ ubuntu@k8s-worker-01:/mnt/disk/vol1/working/raspberry-pi-k8s-experiments/microk8
  }
 ```
 
-```
-6. Run Applications And Ingress
 
+Run Applications And Ingress
+```
 microk8s.kubectl apply -f bar-deployment.yml
 microk8s.kubectl apply -f foo-deployment.yml
 microk8s.kubectl apply -f ingress.yml
-
+```
 
 If you skip this step you'll get a 503 service unavailable
-
+```
 microk8s.kubectl expose deployment foo-app --type=LoadBalancer --port=8080
 microk8s.kubectl expose deployment bar-app --type=LoadBalancer --port=8080
+```
+Testing Endpoint Out
 
-8. Testing Endpoint Out
-
+```
 curl -kL https://127.0.0.1/bar
 curl -kL https://127.0.0.1/foo
 ```
+
+On OSX, test it out:
 
 ```
 s.hendrickson@BLD-ML-00027935 ~ % curl -kL https://192.168.127.7/foo                                        
