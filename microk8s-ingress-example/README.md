@@ -1,6 +1,9 @@
 # microk8s-ingress-example
 
 Microk8s ingress example
+Following very closely:
+
+https://kndrck.co/posts/microk8s_ingress_example/
 
 Build dockerfile and push to docker repository
 * 2021 Nov 18
@@ -15,9 +18,7 @@ docker push localhost:5000/my-microk8s-app
 
 Examples and explanations for build and push to microk8s repo from a pi machine:
 
-```angular2html
 https://medium.com/manikkothu/build-and-deploy-apps-on-microk8s-1df26d1ddd3c
-```
 
 From commandline on worker-01
 * cluster repo is on master and at port 5000
@@ -50,6 +51,8 @@ ubuntu@k8s-worker-01:/mnt/disk/vol1/working/raspberry-pi-k8s-experiments/microk8
 
 
 Run Applications And Ingress
+* major edits to ingress.yml to meet now data scecs
+
 ```
 microk8s.kubectl apply -f bar-deployment.yml
 microk8s.kubectl apply -f foo-deployment.yml
