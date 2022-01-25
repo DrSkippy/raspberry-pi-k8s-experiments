@@ -30,9 +30,9 @@ spec:
             - name: NFS_SERVER
               value: 192.168.127.8
             - name: NFS_PATH
-              value: /mnt/disk/vol1
+              value: /mnt/disk/vol1/k8s_nfs
       volumes:
         - name: nfs-client-root
           nfs:
             server: 192.168.127.8
-            path: /mnt/disk/vol1
+            path: /mnt/disk/vol1/k8s_nfs
