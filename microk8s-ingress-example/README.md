@@ -5,6 +5,10 @@ Following very closely:
 
 https://kndrck.co/posts/microk8s_ingress_example/
 
+```angular2html
+microk8s enable registry
+```
+
 Build dockerfile and push to docker repository
 * 2021 Nov 18
 * I did this on worker-02
@@ -12,8 +16,8 @@ Build dockerfile and push to docker repository
 
 ```
 docker build . -t my-microk8s-app
-docker tag my-microk8s-app localhost:5000/my-microk8s-app
-docker push localhost:5000/my-microk8s-app
+docker tag my-microk8s-app localhost:32000/my-microk8s-app
+docker push localhost:32000/my-microk8s-app
 ```
 
 Examples and explanations for build and push to microk8s repo from a pi machine:
@@ -21,37 +25,20 @@ Examples and explanations for build and push to microk8s repo from a pi machine:
 https://medium.com/manikkothu/build-and-deploy-apps-on-microk8s-1df26d1ddd3c
 
 From commandline on worker-01
-* cluster repo is on master and at port 5000
+* cluster repo is available at localhost:32000
 * configure docker for insecure repo push buy editing config and restarting
 
 ``` 
 sudo vim /etc/docker/daemon.json    # edit to ip shown below, for example
-sudo systemctl restart docker
-docker tag my-microk8s-app 10.1.235.207:5000/my-microk8s-app
-docker push 10.1.235.207:5000/my-microk8s-app
-
-ubuntu@k8s-worker-01:/mnt/disk/vol1/working/raspberry-pi-k8s-experiments/microk8s-ingress-example$ curl 10.1.235.207:5000/v2/_catalog
-{"repositories":["my-microk8s-app"]}
-```
-
-This was my edit of /etc/docker/daemon.json:
-
-```
 ubuntu@k8s-worker-01:/mnt/disk/vol1/working/raspberry-pi-k8s-experiments/microk8s-ingress-example$ cat /etc/docker/daemon.json 
  {
-   "exec-opts": ["native.cgroupdriver=systemd"],
-   "log-driver": "json-file",
-   "log-opts": {
-     "max-size": "100m"
-   },
-   "insecure-registries" : ["10.1.235.207:5000"],
-   "storage-driver": "overlay2"
+   "insecure-registries" : ["localhost:32000"],
  }
+sudo systemctl restart docker
 ```
 
-
 Run Applications And Ingress
-* major edits to ingress.yml to meet now data scecs
+* major edits to ingress.yml to meet new data specs
 
 ```
 microk8s.kubectl apply -f bar-deployment.yml
