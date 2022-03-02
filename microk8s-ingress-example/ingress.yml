@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: k8s-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   rules:
   - http:
@@ -22,3 +22,11 @@ spec:
               name: bar-app
               port:
                 number: 8080
+        - path: /books/(.*)
+          pathType: Prefix
+          backend:
+            service:
+              name: book-service
+              port:
+                number: 8083
+
