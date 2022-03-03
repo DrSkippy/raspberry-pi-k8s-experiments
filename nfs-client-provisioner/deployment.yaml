@@ -1,5 +1,5 @@
-kind: Deployment
 apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: nfs-client-provisioner
   labels:
@@ -26,7 +26,7 @@ spec:
               mountPath: /persistentvolumes
           env:
             - name: PROVISIONER_NAME
-              value: nfs-storage
+              value: rpi-nfs/vol1
             - name: NFS_SERVER
               value: 192.168.127.8
             - name: NFS_PATH
