@@ -3,6 +3,14 @@ https://discuss.kubernetes.io/t/how-to-use-the-built-in-registry/11274/4
 https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/
 
 
+``` 
+sudo vim /etc/docker/daemon.json    # edit to ip shown below, for example
+ubuntu@k8s-worker-01:/mnt/disk/vol1/working/raspberry-pi-k8s-experiments/microk8s-ingress-example$ cat /etc/docker/daemon.json 
+ {
+   "insecure-registries" : ["localhost:32000"],
+ }
+sudo systemctl restart docker
+```
 
 
  2007  microk8s.kubectl get persistentvolume
