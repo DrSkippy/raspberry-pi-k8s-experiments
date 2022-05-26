@@ -28,11 +28,11 @@ spec:
             - name: PROVISIONER_NAME
               value: rpi-nfs/vol1
             - name: NFS_SERVER
-              value: 192.168.127.8
+              value: 192.168.127.11
             - name: NFS_PATH
               value: /mnt/disk/vol1/k8s_nfs
       volumes:
         - name: nfs-client-root
           nfs:
-            server: 192.168.127.8
+            server: 192.168.127.11
             path: /mnt/disk/vol1/k8s_nfs
