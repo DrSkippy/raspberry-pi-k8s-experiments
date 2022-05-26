@@ -21,6 +21,17 @@ Examples and explanations for build and push to microk8s repo from a pi machine:
 
     https://medium.com/manikkothu/build-and-deploy-apps-on-microk8s-1df26d1ddd3c
 
+See what is in the docker registry:
+```angular2html
+docker images ls
+docker container ls
+```
+Or in the microk8s registry:
+```
+curl localhost:3200/v2/_catalog
+curl localhost:32000/v2/book-service/tags/list
+```
+
 Deploy Applications And Ingress
 * major edits to ingress.yml to meet new data specs
 * ingress includes the book db API - One ingress def per cluster, not by app, pod, etc.
