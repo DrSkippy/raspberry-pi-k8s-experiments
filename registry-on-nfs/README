@@ -9,7 +9,6 @@ https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-vo
  2008  microk8s.kubectl get persistentvolumeclaims
  2009  microk8s.kubectl get persistentvolumeclaims --namespace container-registry
 
- 2013  curl localhost:3200/v2/_catalog
  2014  curl localhost:32000/v2/_catalog
  2015  curl localhost:32000/v2/book-service/tags/list
  2016  curl -GET localhost:32000/v2/book-service/tags/list
@@ -20,3 +19,22 @@ https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-vo
  2045  kubectl get pvc
  2046  kubectl get pvc --namespace container-registry
  2047  kubectl get pvc --namespace container-registry -o yaml
+
+
+
+
+
+ 2035  cd /snap/microk8s/current/
+ 2036  find . | grep registry
+ 2037  cat ./actions/registry.yaml 
+ 2039  cat ./actions/registry-help.yaml 
+ 2040  cat ./microk8s-resources/actions/registry.yaml
+ 2044  microk8s disable registry
+ 2057  microk8s disable storage
+ 2063  kubectl get persistentvolumeclaim --namespace=container-registry
+ 2066  kubectl delete persistentvolumes pvc-433c4a02-bce2-41fa-88ac-deb4371c68f6
+ 2078  kubectl apply -f ./claim.yaml 
+ 2079  kubectl get persistentvolumeclaim
+ 2080  kubectl get persistentvolumeclaim --namespace=container-registry
+ 2081  microk8s enable registry
+ 2087  curl localhost:32000/v2/_catalog
