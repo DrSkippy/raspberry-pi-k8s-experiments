@@ -29,4 +29,11 @@ spec:
               name: book-service
               port:
                 number: 8083
+        - path: /tsmodel/(.*)
+          pathType: Prefix
+          backend:
+            service:
+              name: ts-model-service
+              port:
+                number: 8085
 
