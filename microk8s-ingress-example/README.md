@@ -65,3 +65,11 @@ In a browser, try:
 http://192.168.127.11/foo
 http://192.168.127.11/bar
 ```
+## Kuard
+
+Good idea, but it doesn't work as the page renders with java script pages served from the
+docker container file system.  Requires building out page serving to work properly.
+```
+kubectl apply -f ../CH5_pg49_example/kuard-deployment-healthy.yaml
+kubectl expose deployment kuard-app --type=LoadBalancer --port=8080
+```
