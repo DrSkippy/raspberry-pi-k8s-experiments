@@ -1,0 +1,1 @@
+helm upgrade --cleanup-on-fail   --install jupyterlab jupyterhub/jupyterhub   --namespace data-science   --create-namespace   --version=1.2.0   --values config.yaml

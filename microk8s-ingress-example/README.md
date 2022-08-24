@@ -67,7 +67,15 @@ http://192.168.127.11/bar
 ```
 ## Kuard
 
-Good idea, but it doesn't work as the page renders with java script pages served from the
+Tunnel, remote machine:
+```angular2html
+kubectl apply -f ../CH5_pg49_example/kuard-deployment-healthy.yaml
+ALPACA_POD=$(kubectl get pods -l app=kuard-app -o jsonpath='{.items[1].metadata.name}')
+kubectl port-forward $ALPACA_POD 48858:8080
+open http://localhost:48858
+```
+
+Set up ingress. Good idea, but it doesn't work as the page renders with java script pages served from the
 docker container file system.  Requires building out page serving to work properly.
 ```
 kubectl apply -f ../CH5_pg49_example/kuard-deployment-healthy.yaml
