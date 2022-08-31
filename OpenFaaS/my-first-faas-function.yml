@@ -6,5 +6,5 @@ functions:
   my-first-faas-function:
     lang: python3-http-armhf
     handler: ./my-first-faas-function
-    image: my-first-faas-function:latest
+    image: localhost:32000/my-first-faas-function:latest
 
