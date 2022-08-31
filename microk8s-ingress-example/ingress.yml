@@ -33,13 +33,13 @@ spec:
               name: book-service
               port:
                 number: 8083
-        - path: /kuard/(.*)
-          pathType: Prefix
-          backend:
-            service:
-              name: kuard-app
-              port:
-                number: 8080
+#         - path: /kuard/(.*)
+#           pathType: Prefix
+#           backend:
+#             service:
+#               name: kuard-app
+#               port:
+#                 number: 8080
 #         - path: /ts-model/(.*)
 #           pathType: Prefix
 #           backend:
